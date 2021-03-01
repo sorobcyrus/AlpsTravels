@@ -1,0 +1,576 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/28/2021 6:12:56 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SOROB-DEV-2"
+  DTS:CreatorName="SOROB-DEV-2\sorob"
+  DTS:DTSID="{3F661A79-4771-4BAA-8C47-54DFC4FA3D66}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.152"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{53D2A95E-59E4-4A05-B5E0-89CB24B58031}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CreateSchema.sql]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{E026EDCC-5ADD-44A0-95FC-94B2712A8766}"
+      DTS:ObjectName="CreateSchema.sql">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\AlpsTravels\Schema\CreateSchema.sql" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DataInsert.sql]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{E714F5F6-BF9F-43F6-AFE1-9AA55F926237}"
+      DTS:ObjectName="DataInsert.sql">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::DataFolderPath]+"\\"+ @[User::DataFileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\AlpsTravels\PopulateTables\" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DBRebuild.sql]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{90E4B3ED-CE40-4D41-8FD6-8CEE8149C9A4}"
+      DTS:ObjectName="DBRebuild.sql">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\AlpsTravels\Rebuild\01_RebuildTables.sql" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[EnvSetup.sql]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{C1A8A512-8D10-4580-AD9F-8C5846DC2840}"
+      DTS:ObjectName="EnvSetup.sql">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::EnvFolderPath]+"\\"+@[User::EnvFileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\AlpsTravels\Env\" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[EnvSPs.sql]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{3268B69C-B18D-44D3-A531-273ADC28B4E0}"
+      DTS:ObjectName="EnvSPs.sql">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::EnvFolderPath]+"\\"+ @[User::EnvFileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\AlpsTravels\Env\" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.AlpsTravels]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{80BEB168-C739-4B30-9C40-2521581ABF1C}"
+      DTS:ObjectName="LocalHost.AlpsTravels">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Initial Catalog=AlpsTravels;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SPs.sql]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{A28212FA-DA8D-474B-B908-64789A0EB42C}"
+      DTS:ObjectName="SPs.sql">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::SPsFolderPath]+"\\"+ @[User::SpFileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\AlpsTravels\SP\" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8570D8CB-338C-4039-8A23-ED7A3BE5A587}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DataFileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0F0EAB14-A5E0-4EE3-97C1-2F3338B57A01}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DataFolderPath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\AlpsTravels\PopulateTables</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C2BF2197-A8A7-4555-BB77-C3B44F50FB45}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="EnvFileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C0D31B99-8402-40E1-A4B5-47456626D1EA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="EnvFolderPath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\AlpsTravels\Env</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8CD24CC2-ADC6-4B19-8959-91AB53B081EB}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SpFileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CB02915D-8EC7-4C03-8CBE-85953318F316}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SPsFolderPath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\AlpsTravels\SP</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Schema"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{53566CC7-12BB-4E21-ABC0-C44AEDA02F6F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Schema"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{80BEB168-C739-4B30-9C40-2521581ABF1C}"
+          SQLTask:SqlStmtSourceType="FileConnection"
+          SQLTask:SqlStatementSource="CreateSchema.sql" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Environmet Setup"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{F517BF74-7756-482A-B2BF-FB669C45CD23}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Environmet Setup">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{D1B8E629-0313-4DD8-94FE-FBE20DAF56DB}"
+        DTS:ObjectName="{D1B8E629-0313-4DD8-94FE-FBE20DAF56DB}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[User::EnvFolderPath]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="C:\AlpsTravels\Env" />
+            <FEFEProperty
+              FileSpec="*.sql" />
+            <FEFEProperty
+              FileNameRetrievalType="1" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Environmet Setup\EnvSPs"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{D4F41999-AD08-41EB-9A92-0B3929C60677}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EnvSPs"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{80BEB168-C739-4B30-9C40-2521581ABF1C}"
+              SQLTask:SqlStmtSourceType="FileConnection"
+              SQLTask:SqlStatementSource="EnvSPs.sql" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{7DE592D4-FDE2-4A10-AEC5-5ED54250F33E}"
+          DTS:ObjectName="{7DE592D4-FDE2-4A10-AEC5-5ED54250F33E}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::EnvFileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Data"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{0107D80E-7473-4956-9891-A4F2F6C0294C}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Data">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{92D32BD1-82FF-4DB5-B98A-0C933BEA06AB}"
+        DTS:ObjectName="{92D32BD1-82FF-4DB5-B98A-0C933BEA06AB}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[User::DataFolderPath]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="C:\AlpsTravels\PopulateTables" />
+            <FEFEProperty
+              FileSpec="*.sql" />
+            <FEFEProperty
+              FileNameRetrievalType="1" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Insert Data\Insert Data"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{6F1099EB-55EC-4B17-B7C4-455B2C380E7A}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Insert Data"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{80BEB168-C739-4B30-9C40-2521581ABF1C}"
+              SQLTask:SqlStmtSourceType="FileConnection"
+              SQLTask:SqlStatementSource="DataInsert.sql" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{333607C4-D542-4772-9B11-B6B0C4F979A7}"
+          DTS:ObjectName="{333607C4-D542-4772-9B11-B6B0C4F979A7}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::DataFileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert SPs"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{AA124323-E22C-4461-9B8D-80BDF0BC9DB7}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert SPs">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{8C969764-0498-4F28-8C7A-B53F0F743C35}"
+        DTS:ObjectName="{8C969764-0498-4F28-8C7A-B53F0F743C35}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[User::SPsFolderPath]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="C:\AlpsTravels\SP" />
+            <FEFEProperty
+              FileSpec="*.sql" />
+            <FEFEProperty
+              FileNameRetrievalType="1" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Insert SPs\Run SPs"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{266FF95D-8DBD-443D-95D9-A9A7D10144AA}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Run SPs"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{80BEB168-C739-4B30-9C40-2521581ABF1C}"
+              SQLTask:SqlStmtSourceType="FileConnection"
+              SQLTask:SqlStatementSource="SPs.sql" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{62D25A3D-671A-49CC-BC16-705B9898447B}"
+          DTS:ObjectName="{62D25A3D-671A-49CC-BC16-705B9898447B}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::SpFileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Rebuild DB"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C5F0ED30-A371-4FBC-A45F-FA0E3509431D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Rebuild DB"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{80BEB168-C739-4B30-9C40-2521581ABF1C}"
+          SQLTask:SqlStmtSourceType="FileConnection"
+          SQLTask:SqlStatementSource="DBRebuild.sql" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{5E33E9EA-B001-47F8-A353-B70E5E4692CA}"
+      DTS:From="Package\Create Schema"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Insert SPs" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{230BD941-006D-45E4-8213-4E83004663DD}"
+      DTS:From="Package\Insert SPs"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Environmet Setup" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{E476950D-ECC1-492E-9699-0318FBF2C3F8}"
+      DTS:From="Package\Environmet Setup"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Rebuild DB" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{3EA2F3BC-8E35-4E12-94FC-462115667ECA}"
+      DTS:From="Package\Rebuild DB"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Insert Data" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="168,42.6666666666667"
+          Id="Package\Create Schema"
+          TopLeft="62.4999990686774,32.3444982164604" />
+        <NodeLayout
+          Size="168,42.6666666666667"
+          Id="Package\Insert SPs\Run SPs"
+          TopLeft="20.4545444046909,16.2105294066453" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="205.333333333334,114"
+          Size="205.333333333334,156.666666666667"
+          Id="Package\Insert SPs"
+          TopLeft="49.9999992549419,105.119619203496" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="149.583332495143,75.0111648831271">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.1084543203694"
+              Start="0,0"
+              End="0,22.6084543203694">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.6084543203694" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="168,42.6666666666667"
+          Id="Package\Rebuild DB"
+          TopLeft="597.727263820443,190.601507346999" />
+        <NodeLayout
+          Size="168,42.6666666666667"
+          Id="Package\Environmet Setup\EnvSPs"
+          TopLeft="22.6071370962475,25.428578070232" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="205.333333333334,122.666666666667"
+          Size="205.333333333334,166"
+          Id="Package\Environmet Setup"
+          TopLeft="57.1428562913621,332.280707972894" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="152.666665921609,261.786285870163">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-25.7460318524687,70.4944221027305"
+              Start="0,0"
+              End="-25.7460318524687,62.9944221027305">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.9696172828112" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.9696172828112"
+                    Point2="0,41.9696172828112"
+                    Point3="-4,41.9696172828112" />
+                  <mssgle:LineSegment
+                    End="-21.7460318524687,41.9696172828112" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-21.7460318524687,41.9696172828112"
+                    Point2="-25.7460318524687,41.9696172828112"
+                    Point3="-25.7460318524687,45.9696172828112" />
+                  <mssgle:LineSegment
+                    End="-25.7460318524687,62.9944221027305" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="192.698411846918,332.280707972894">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="462.362185306858,-99.0125339592277"
+              Start="0,0"
+              End="462.362185306858,-91.5125339592277">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-45.4013808207587" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-45.4013808207587"
+                    Point2="0,-49.4013808207587"
+                    Point3="4,-49.4013808207587" />
+                  <mssgle:LineSegment
+                    End="458.362185306858,-49.4013808207587" />
+                  <mssgle:CubicBezierSegment
+                    Point1="458.362185306858,-49.4013808207587"
+                    Point2="462.362185306858,-49.4013808207587"
+                    Point3="462.362185306858,-53.4013808207587" />
+                  <mssgle:LineSegment
+                    End="462.362185306858,-91.5125339592277" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="168,42.6666666666667"
+          Id="Package\Insert Data\Insert Data"
+          TopLeft="30.5833239269756,22.5964961403233" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="230.666666666667,129.333333333334"
+          Size="230.666666666667,172"
+          Id="Package\Insert Data"
+          TopLeft="501.785706808525,389.198001040395" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="708.393930487109,233.268174013666">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-91.2748903452513,155.929827026729"
+              Start="0,0"
+              End="-91.2748903452513,148.429827026729">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.2545524731069" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,59.2545524731069"
+                    Point2="0,63.2545524731069"
+                    Point3="-4,63.2545524731069" />
+                  <mssgle:LineSegment
+                    End="-87.2748903452513,63.2545524731069" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-87.2748903452513,63.2545524731069"
+                    Point2="-91.2748903452513,63.2545524731069"
+                    Point3="-91.2748903452513,67.2545524731069" />
+                  <mssgle:LineSegment
+                    End="-91.2748903452513,148.429827026729" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
