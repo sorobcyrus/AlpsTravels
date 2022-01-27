@@ -1,5 +1,5 @@
 # AlpsTravels
- Database for a Fictitious travel agency
+ A small sample of a database for a Fictitious travel agency
 
 # Instruction For SQL Server On-Premises
 1- Create a local folder "C:\AlpsTravels". <br />
